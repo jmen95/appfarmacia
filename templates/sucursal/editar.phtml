@@ -1,0 +1,98 @@
+<?= $this->insert('overall/header')?>
+
+<body>
+
+<?= $this->insert('overall/topnav')?>
+
+  <div class="ts-main-content">
+
+    <?= $this->insert('overall/menu')?>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+          
+            <h1 class="page-title">Sucursal</h1>
+
+            <h2>Edición</h2>
+            
+            <div class="col-lg-2"></div>
+            <div class="well col-lg-8">
+              <div class="form-actions">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Editar Sucursal</div>
+                  <div class="panel-body">
+
+                    <form id="sucursal_form" role="form">
+
+                      <input type="hidden" name="id" value="<?= $data['id'] ?>" />
+
+                      <div class="alert hide" id="ajax_sucursal"></div>
+                      
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nombre:</label>
+                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['sucname'] ?>" placeholder="Escriba el nombre..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Dirección:</label>
+                        <input type="text" class="form-control form-input" name="direccion" value="<?= $data['sucdir'] ?>" placeholder="Escriba la dirección..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Teléfono:</label>
+                        <input type="text" class="form-control form-input" name="telefono" value="<?= $data['suctel'] ?>" placeholder="Escriba el teléfono..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Empresa:</label>
+                        
+                        <?= Bootstrap::basic_select('empresa',$empresa, false,  $data['empresa']??0 , 'form-control') ?>
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Descripción:</label>
+                        <textarea class="form-control form-input" name="descripcion" placeholder="Escribe la descripción..." rows="3"><?= $data['sucdesc'] ?></textarea>
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <div class="checkbox checkbox-info checkbox-circle">
+                          <input id="principal" type="checkbox" value="1" name="principal" <?= $data['principal']==1?'checked':'' ?>>
+                          <label for="principal">
+                            Sucursal principal <?= $data['principal']==1?'checked':'' ?>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <button type="button" id="sucursal" class="btn btn-primary  center-block">Enviar</button>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary" href="sucursal">Ver listado</a>
+            </div>
+            <div class="col-lg-2"></div> 
+
+            
+          </div>
+        </div>
+        
+        <?= $this->insert('overall/inner_footer')?>
+
+      </div>
+    </div>
+  </div>
+
+<?= $this->insert('overall/footer')?>
+<script src="views/app/js/sucursal/editar.js"></script>
+</body>
+
+</html>

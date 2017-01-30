@@ -1,0 +1,26 @@
+.show {
+  display: block!important;
+}
+.hide {
+  display: none!important;
+}
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+/* DEMO ONLY - REMOVES UNWANTED MARGIN */
+.well .list-group {
+    margin-bottom: 0px;
+}
+.list-group-item-info {
+    color: #29abe0 !important;
+    background-color: #d9edf7 !important;
+    border-color: #29abe0 !important;
+}
+.list-group-item select{
+	float: right;
+}

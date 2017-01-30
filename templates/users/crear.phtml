@@ -1,0 +1,122 @@
+<?= $this->insert('overall/header')?>
+
+<body>
+
+<?= $this->insert('overall/topnav')?>
+
+  <div class="ts-main-content">
+
+    <?= $this->insert('overall/menu')?>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+          
+            <h1 class="page-title">Users</h1>
+
+            <h2>Creación</h2>
+            
+            <div class="col-lg-2"></div>
+            <div class="well col-lg-8">
+              <div class="form-actions">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Crear usuario</div>
+                  <div class="panel-body">
+                    <form id="users_form" role="form">
+                      <div class="alert hide" id="ajax_users"></div>
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nro. Cédula:</label>
+                        <input type="text" class="form-control form-input" name="cedula" placeholder="Escriba el nro de cédula..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nombre:</label>
+                        <input type="text" class="form-control form-input" name="nombre" placeholder="Escriba el nombre..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Teléfono:</label>
+                        <input type="text" class="form-control form-input" name="telefono" placeholder="Escriba el telefono..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Dirección:</label>
+                        <input type="text" class="form-control form-input" name="direccion" placeholder="Escriba la dirección..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Correo:</label>
+                        <input type="text" class="form-control form-input" name="correo" placeholder="Escriba el correo..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Usuario:</label>
+                        <input type="text" class="form-control form-input" name="usuario" placeholder="Escriba el usuario..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Contraseña:</label>
+                        <input type="password" class="form-control form-input" name="pass" placeholder="Escriba la contraseña..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Repetir contraseña:</label>
+                        <input type="password" class="form-control form-input" name="pass2" placeholder="Escriba otra vez contraseña..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Sucursal:</label>
+                        
+                        <?= Bootstrap::basic_select('sucursal',$sucursal, false, '0', 'form-control') ?>
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Rol:</label>
+                        
+                        <?= Bootstrap::basic_select('rol',$roles, false, '0', 'form-control') ?>
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Estado:</label>
+                        <select class="form-control" name="estado">
+                          <option value="AC">Activo</option>
+                          <option value="IN">Inactivo</option>
+                        </select> 
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <button type="button" id="users" class="btn btn-primary  center-block">Enviar</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+
+                </div>
+                
+
+              </div>
+              <a class="btn btn-primary" href="users">Ver listado</a>
+            </div>
+              <div class="col-lg-2"></div> 
+            
+          </div>
+        </div>
+        
+        <?= $this->insert('overall/inner_footer')?>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+<?= $this->insert('overall/footer')?>
+<script src="views/app/js/users/crear.js"></script>
+</body>
+
+</html>

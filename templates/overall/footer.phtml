@@ -1,0 +1,39 @@
+
+<div class="framework-options">
+  <h4 class="pull-left">Documentación oficial</h4>
+  <div class="pull-right documentacion">
+    <a class="fa fa-youtube" href="https://www.youtube.com/playlist?list=PLDQZoQpLCoUBVbDUxr8cxVX0ik8uh5WBh" target="_blank"></a>
+    <a class="fa fa-github"  href="https://github.com/prinick96/Ocrend-Framework/wiki" target="_blank"></a>
+    <a class="fa fa-globe" href="http://framework.ocrend.com" target="_blank"></a>
+  </div>
+  </ul>
+</div>
+
+<!-- IMPORTANT FOR DEBUG MODE NO DELETE -->
+<?php if (true == DEBUG): ?>
+<script src="views/app/js/jdev.js"></script>
+<?php else: ?>
+  <script src="views/admin/js/jquery.min.js"></script>
+<?php endif ?>
+<!-- IMPORTANT FOR DEBUG MODE NO DELETE -->
+
+  <script src="views/admin/js/bootstrap-select.min.js"></script>
+  <script src="views/admin/js/bootstrap.min.js"></script>
+  <script src="views/admin/js/jquery.dataTables.min.js"></script>
+  <script src="views/admin/js/dataTables.bootstrap.min.js"></script>
+  <script src="views/admin/js/Chart.min.js"></script>
+  <script src="views/admin/js/fileinput.js"></script>
+  <script src="views/admin/js/chartData.js"></script>
+  <script src="views/admin/js/main.js"></script>
+  <script src="views/app/js/jquery.numeric.js"></script>
+<?php if (!isset($_SESSION[SESS_APP_ID])): ?>
+  <script src="views/app/js/login.js"></script>
+  <script src="views/app/js/register.js"></script>
+  <script src="views/app/js/lostpass.js"></script>
+<?php else:?>
+  <script src="views/app/js/funciones.js"></script>
+<?php endif ?>
+<script>
+  $('.numeric').numeric();
+</script>
+

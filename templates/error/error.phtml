@@ -1,0 +1,42 @@
+<?= $this->insert('overall/header')?>
+
+<body>
+
+<?= $this->insert('overall/topnav')?>
+
+  <div class="ts-main-content">
+
+    <?= $this->insert('overall/menu')?>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+          
+            <h2 class="page-title">¡404 ERROR!</h2>
+            
+            <div class="well">
+             <span class="ocrend-welcome-subtitle">Elemento no encontrado.</span>
+                 <div class="form-actions">
+                  <p>Controlador <b><?= str_replace('Controller','',$controller) ?></b> no encontrado.</p>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+        
+        <?= $this->insert('overall/inner_footer')?>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+<?= $this->insert('overall/footer')?>
+
+</body>
+
+</html>

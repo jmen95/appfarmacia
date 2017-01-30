@@ -1,0 +1,76 @@
+<?= $this->insert('overall/header')?>
+
+<body>
+
+<?= $this->insert('overall/topnav')?>
+
+  <div class="ts-main-content">
+
+    <?= $this->insert('overall/menu')?>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+          
+            <h1 class="page-title">Empresa</h1>
+
+            <h2>Edición</h2>
+            
+            <div class="col-lg-2"></div>
+            <div class="well col-lg-8">
+              <div class="form-actions">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Editar Empresa</div>
+                  <div class="panel-body">
+
+                    <form id="empresa_form" role="form">
+
+                      <input type="hidden" name="id" value="<?= $data['id'] ?>" />
+
+                      <div class="alert hide" id="ajax_empresa"></div>
+                      
+                       <div class="col-lg-4 form-group">
+                        <label class="cole">Nit:</label>
+                        <input type="text" class="form-control form-input" name="nit" value="<?= $data['empnit'] ?>" placeholder="Escriba el nit..." />
+                      </div>
+                      
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nombre:</label>
+                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['empname'] ?>" placeholder="Escriba el nombre..." />
+                      </div>
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Descripción:</label>
+                        <textarea class="form-control form-input" name="descripcion" placeholder="Escribe la descripción..." rows="3"><?= $data['empdesc'] ?></textarea>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <button type="button" id="empresa" class="btn btn-primary  center-block">Enviar</button>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary" href="empresa">Ver listado</a>
+            </div>
+            <div class="col-lg-2"></div> 
+
+            
+          </div>
+        </div>
+        
+        <?= $this->insert('overall/inner_footer')?>
+
+      </div>
+    </div>
+  </div>
+
+<?= $this->insert('overall/footer')?>
+<script src="views/app/js/empresa/editar.js"></script>
+</body>
+
+</html>
