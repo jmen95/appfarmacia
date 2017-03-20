@@ -14,6 +14,9 @@ abstract class Controllers {
   protected $method;
   protected $route;
   protected $page;
+  protected $edita;
+  protected $elimina;
+  protected $crear;
   protected $session = null;
 
   //------------------------------------------------
@@ -45,23 +48,33 @@ abstract class Controllers {
       exit;
     }
 
-    if($LOGED){
+    if($LOGED And $this->route->getControllerName()!='home'){
+
       $paginas = array_merge($_SESSION['MENU'], $_SESSION['MENUHIJOS']);
 
      
+     $this->method = ($router->getMethod() != null and Strings::alphanumeric($router->getMethod())) ? $router->getMethod() : null;
      
-     $key = array_search($this->route->getControllerName(), array_column($paginas, 'pagurl'));
+      if($this->method!='editar' And $this->method!='eliminar' And $this->method != null){
+        $key = array_search($this->route->getControllerName().'/'.$this->method, array_column($paginas, 'pagurl'));
+      }else{
+        $key = array_search($this->route->getControllerName(), array_column($paginas, 'pagurl'));
+      }
+
 
      if(false!=$key){
-
-          echo var_dump($paginas[$key]['peredita  ']);
+        $this->edita=$paginas[$key]['peredita']=='S';
+        $this->elimina=$paginas[$key]['perelimina']=='S';
      }else{
-          echo "no";
+          Func::redir();
      }
+      
+      if($this->method=='editar' And !$this->edita){
+        $this->method=null;
+      }else if($this->method=='eliminar' And !$this->elimina){
+        $this->method=null;
+      }
     
-
-    
-      exit;
       // $this->session = new Sessions;
       // $this->session->check_life();
     }
@@ -81,7 +94,7 @@ abstract class Controllers {
     }
 
     # Utilidades
-    $this->method = ($router->getMethod() != null and Strings::alphanumeric($router->getMethod())) ? $router->getMethod() : null;
+    // $this->method = ($router->getMethod() != null and Strings::alphanumeric($router->getMethod())) ? $router->getMethod() : null;
     $this->isset_id = ($router->getId() != null and is_numeric($router->getId()) and $router->getId() >= 1);
     $this->page = $this->route->getControllerName();
 
