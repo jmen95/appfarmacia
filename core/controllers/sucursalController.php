@@ -44,7 +44,10 @@ class sucursalController extends Controllers {
       default:
         Helper::load('bootstrap');
         echo $this->template->render('sucursal/sucursal',array(
-          'data' => $m->leer()
+          'data' => $m->leer(),
+          'edita' => $this->edita,
+          'elimina' => $this->elimina,
+          'crea' => $this->crea
         ));
       break;
     }

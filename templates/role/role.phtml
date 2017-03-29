@@ -21,7 +21,7 @@
             <div class="well">
               <div class="form-actions">
 
-                <div class="panel-heading">Table by DataTables plugin</div>
+                <div class="panel-heading">LISTADO DE ROLES</div>
                   <div class="panel-body">
                     <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                       <thead>
@@ -30,8 +30,12 @@
                           <th>Nombre</th>
                           <th>Descripción</th>
                           <th>Estado</th>
+                          <?php  if(false!=$edita): ?>
                           <th></th>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <th></th>
+                          <?php  endif ?>
                         </tr>
                       </thead>
                       <tfoot>
@@ -40,8 +44,12 @@
                           <th>Nombre</th>
                           <th>Descripción</th>
                           <th>Estado</th>
+                          <?php  if(false!=$edita): ?>
                           <th></th>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <th></th>
+                          <?php  endif ?>                         
                         </tr>
                       </tfoot>
                       <tbody>
@@ -51,13 +59,19 @@
                           <td><?= $d['rolname'] ?></td>
                           <td><?= $d['roldesc'] ?></td>
                           <td><?= $d['rolestado']=='AC'?'Activo':'Inactivo' ?></td>
+                          <?php  if(false!=$edita): ?>
                           <td><a href="role/editar/<?= $d['rolid'] ?>">Editar</a></td>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <td><a href="role/eliminar/<?= $d['rolid'] ?>">Eliminar</a></td>
+                          <?php  endif ?>
                         </tr>
                         <?php endforeach ?>
                         </tbody>
                     </table>
+                <?php  if(false!=$edita): ?>
                 <a class="btn btn-primary" href="role/crear">Crear</a>
+                <?php  endif ?>
               </div>
             </div>
             

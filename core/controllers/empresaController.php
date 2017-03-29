@@ -31,7 +31,10 @@ class empresaController extends Controllers {
       default:
         Helper::load('bootstrap');
         echo $this->template->render('empresa/empresa',array(
-          'data' => $m->leer()
+          'data' => $m->leer(),
+          'edita' => $this->edita,
+          'elimina' => $this->elimina,
+          'crea' => $this->crea
         ));
       break;
     }

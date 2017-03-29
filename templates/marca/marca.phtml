@@ -14,14 +14,14 @@
         <div class="row">
           <div class="col-md-12">
           
-            <h1 class="page-title">Sucursal</h1>
+            <h1 class="page-title">Marca</h1>
 
             <h2>Listado</h2>
             
             <div class="well">
               <div class="form-actions">
 
-                <div class="panel-heading">Table by DataTables plugin</div>
+                <div class="panel-heading">LISTADO DE MARCAS</div>
                   <div class="panel-body">
                     <table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                       <thead>
@@ -29,10 +29,7 @@
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
-                          <th>Dirección</th>
-                          <th>Teléfono</th>
-                          <th>Empresa</th>
-                          <th>Principal</th>
+                          <th>Estado</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -46,10 +43,7 @@
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
-                          <th>Dirección</th>
-                          <th>Teléfono</th>
-                          <th>Empresa</th>
-                          <th>Principal</th>
+                          <th>Estado</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -61,26 +55,24 @@
                       <tbody>
                         <?php foreach(false != $data ? $data : array() as $d): ?>
                         <tr>
-                          <td><?= $d['id'] ?></td>
-                          <td><?= $d['sucname'] ?></td>
-                          <td><?= $d['sucdesc'] ?></td>
-                          <td><?= $d['sucdir'] ?></td>
-                          <td><?= $d['suctel'] ?></td>
-                          <td><?= $d['empname'] ?></td>
-                          <td><?= $d['principal']=='1'?'Si':'No' ?></td>
+                          <td><?= $d['marCodigo'] ?></td>
+                          <td><?= $d['marNombre'] ?></td>
+                          <td><?= $d['marDescripcion'] ?></td>
+                          <td><?= $d['marEstado']=='AC'?'Activo':'Inactivo' ?></td>
                           <?php  if(false!=$edita): ?>
-                          <td><a href="sucursal/editar/<?= $d['id'] ?>">Editar</a></td>
+                          <td><a href="marca/editar/<?= $d['marCodigo'] ?>">Editar</a></td>
                           <?php  endif ?>
                           <?php  if(false!=$elimina): ?>
-                          <td><a href="sucursal/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
+                          <td><a href="marca/eliminar/<?= $d['marCodigo'] ?>">Eliminar</a></td>
                           <?php  endif ?>
                         </tr>
                         <?php endforeach ?>
                         </tbody>
                     </table>
-                <?php  if(false!=$crea): ?>
-                <a class="btn btn-primary" href="sucursal/crear">Crear</a>
-                <?php  endif ?>
+                    <?php  if(false!=$crea): ?>
+                     <a class="btn btn-primary" href="marca/crear">Crear</a>
+                    <?php  endif ?>
+                
               </div>
             </div>
             

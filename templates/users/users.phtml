@@ -37,8 +37,12 @@
                       <th>Sucursal</th>
                       <th>Rol</th>
                       <th>Estado</th>
+                      <?php  if(false!=$edita): ?>
                       <th></th>
+                      <?php  endif ?>
+                      <?php  if(false!=$elimina): ?>
                       <th></th>
+                      <?php  endif ?>                      
                     </tr>
                   </thead>
                   <tfoot>
@@ -53,8 +57,12 @@
                       <th>Sucursal</th>
                       <th>Rol</th>
                       <th>Estado</th>
+                      <?php  if(false!=$edita): ?>  
                       <th></th>
+                      <?php  endif ?> 
+                      <?php  if(false!=$elimina): ?>  
                       <th></th>
+                      <?php  endif ?>                       
                     </tr>
                   </tfoot>
                   <tbody>
@@ -70,13 +78,19 @@
                     <td><?= $d['sucname'] ?></td>
                     <td><?= $d['rolname'] ?></td>
                     <td><?= $d['userestado']=='AC'?'Activo':'Inactivo' ?></td>
+                    <?php  if(false!=$edita): ?>
                     <td><a href="users/editar/<?= $d['userid'] ?>">Editar</a></td>
+                    <?php  endif ?>
+                    <?php  if(false!=$elimina): ?>
                     <td><a href="users/eliminar/<?= $d['userid'] ?>">Eliminar</a></td>
+                    <?php  endif ?>
                   </tr>
                   <?php endforeach ?>
                   </tbody>
                 </table>
+                <?php  if(false!=$crea): ?>
                 <a class="btn btn-primary" href="users/crear">Crear</a>
+                <?php  endif ?>
               </div>
             </div>
             

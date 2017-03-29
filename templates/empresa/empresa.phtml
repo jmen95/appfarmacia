@@ -30,8 +30,12 @@
                           <th>Nit</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
+                          <?php  if(false!=$edita): ?>
                           <th></th>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <th></th>
+                          <?php  endif ?>
                         </tr>
                       </thead>
                       <tfoot>
@@ -40,8 +44,12 @@
                           <th>Nit</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
+                          <?php  if(false!=$edita): ?>
                           <th></th>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <th></th>
+                          <?php  endif ?>
                         </tr>
                       </tfoot>
                       <tbody>
@@ -51,13 +59,19 @@
                           <td><?= $d['empnit'] ?></td>
                           <td><?= $d['empname'] ?></td>
                           <td><?= $d['empdesc'] ?></td>
+                          <?php  if(false!=$edita): ?>
                           <td><a href="empresa/editar/<?= $d['id'] ?>">Editar</a></td>
+                          <?php  endif ?>
+                          <?php  if(false!=$elimina): ?>
                           <td><a href="empresa/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
+                          <?php  endif ?>
                         </tr>
                         <?php endforeach ?>
                         </tbody>
                     </table>
+                <?php  if(false!=$crea): ?>
                 <a class="btn btn-primary" href="empresa/crear">Crear</a>
+                <?php  endif ?>
               </div>
             </div>
             

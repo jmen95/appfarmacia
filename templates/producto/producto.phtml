@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-12">
           
-            <h1 class="page-title">Sucursal</h1>
+            <h1 class="page-title">Producto</h1>
 
             <h2>Listado</h2>
             
@@ -27,12 +27,6 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Dirección</th>
-                          <th>Teléfono</th>
-                          <th>Empresa</th>
-                          <th>Principal</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -44,12 +38,6 @@
                       <tfoot>
                         <tr>
                           <th>#</th>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Dirección</th>
-                          <th>Teléfono</th>
-                          <th>Empresa</th>
-                          <th>Principal</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -62,24 +50,18 @@
                         <?php foreach(false != $data ? $data : array() as $d): ?>
                         <tr>
                           <td><?= $d['id'] ?></td>
-                          <td><?= $d['sucname'] ?></td>
-                          <td><?= $d['sucdesc'] ?></td>
-                          <td><?= $d['sucdir'] ?></td>
-                          <td><?= $d['suctel'] ?></td>
-                          <td><?= $d['empname'] ?></td>
-                          <td><?= $d['principal']=='1'?'Si':'No' ?></td>
                           <?php  if(false!=$edita): ?>
-                          <td><a href="sucursal/editar/<?= $d['id'] ?>">Editar</a></td>
+                          <td><a href="producto/editar/<?= $d['id'] ?>">Editar</a></td>
                           <?php  endif ?>
                           <?php  if(false!=$elimina): ?>
-                          <td><a href="sucursal/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
+                          <td><a href="producto/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
                           <?php  endif ?>
                         </tr>
                         <?php endforeach ?>
                         </tbody>
                     </table>
                 <?php  if(false!=$crea): ?>
-                <a class="btn btn-primary" href="sucursal/crear">Crear</a>
+                <a class="btn btn-primary" href="producto/crear">Crear</a>
                 <?php  endif ?>
               </div>
             </div>

@@ -14,31 +14,26 @@
         <div class="row">
           <div class="col-md-12">
           
-            <h1 class="page-title">Role</h1>
+            <h1 class="page-title">Marca</h1>
 
-            <h2>Edición</h2>
-
+            <h2>Creación</h2>
+            
             <div class="col-lg-2"></div>
             <div class="well col-lg-8">
               <div class="form-actions">
                 <div class="panel panel-default">
-                  <div class="panel-heading">Editar rol</div>
+                  <div class="panel-heading">Crear Marca</div>
                   <div class="panel-body">
-
-                    <form id="role_form" role="form">
-
-                      <input type="hidden" name="id" value="<?= $data['id'] ?>" />
-
-                      <div class="alert hide" id="ajax_role"></div>
-
+                    <form id="marca_form" role="form">
+                      <div class="alert hide" id="ajax_marca"></div>
                       <div class="col-lg-6 form-group">
                         <label class="cole">Nombre:</label>
-                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['rolname'] ?>" placeholder="Escribe el nombre..." />
+                        <input type="text" class="form-control form-input" name="nombre" placeholder="Escribe el nombre..." />
                       </div>
                       
                       <div class="col-lg-6 form-group">
                         <label class="cole">Estado:</label>
-                        <select class="form-control" name="estado" value="<?= $data['rolestado'] ?>">
+                        <select class="form-control" name="estado">
                           <option value="AC">Activo</option>
                           <option value="IN">Inactivo</option>
                         </select> 
@@ -46,23 +41,23 @@
                       
                       <div class="col-lg-6 form-group">
                         <label class="cole">Descripción:</label>
-                        <textarea class="form-control form-input" name="descripcion"  placeholder="Escribe la descripción..." rows="3"><?= $data['roldesc'] ?></textarea>
+                        <textarea class="form-control form-input" name="descripcion" placeholder="Escribe la descripción..." rows="3"></textarea>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <button type="button" id="role" class="btn btn-primary  center-block">Enviar</button>
+                          <button type="button" id="marca" class="btn btn-primary  center-block">Enviar</button>
                         </div>
                       </div>
                     </form>
                   </div>
 
                 </div>
-              </div>
+                
 
-              <a class="btn btn-primary" href="role">Ver listado</a>
+              </div>
+              <a class="btn btn-primary" href="marca">Ver listado</a>
             </div>
             <div class="col-lg-2"></div> 
-
             
           </div>
         </div>
@@ -73,8 +68,11 @@
     </div>
   </div>
 
+
+
+
 <?= $this->insert('overall/footer')?>
-<script src="views/app/js/role/editar.js"></script>
+<script src="views/app/js/marca/crear.js"></script>
 </body>
 
 </html>

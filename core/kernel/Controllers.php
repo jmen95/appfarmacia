@@ -66,14 +66,20 @@ abstract class Controllers {
         $this->edita=$paginas[$key]['peredita']=='S';
         $this->elimina=$paginas[$key]['perelimina']=='S';
      }else{
-          Func::redir();
+          // Func::redir(); //activar para produccion
      }
       
-      if($this->method=='editar' And !$this->edita){
-        $this->method=null;
-      }else if($this->method=='eliminar' And !$this->elimina){
-        $this->method=null;
-      }
+      //activar para produccion
+      // if($this->method=='editar' And !$this->edita){
+      //   $this->method=null;
+      // }else if($this->method=='eliminar' And !$this->elimina){
+      //   $this->method=null;
+      // }
+
+     //desactivar para produccion
+     $this->edita=true;
+     $this->elimina=true;
+     $this->crea=true;
     
       // $this->session = new Sessions;
       // $this->session->check_life();
