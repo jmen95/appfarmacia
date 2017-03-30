@@ -15,10 +15,23 @@ final class Producto extends Models implements OCREND {
   final public function errores(array $data) {
     try {
 
-      $i = array(
-      'tideNombre' => $data['nombre'],
-      'tideDescripcion' => $data['descripcion'],
-      'tideEstado' => $data['estado']
+    $i = array(
+      'proCodigoBarra' => $data['codigobarra'],
+      'proNombre' => $data['nombre'],
+      'proMarCodigo' => $data['marca'],
+      'proValorCompra' => $data['valorcompra'],
+      'proStockMinimo' => $data['stockminimo'],
+      'proStockBodega' => $data['stockbodega'],
+      'proGruCodigo' => $data['categoria'],
+      'proEstado' => $data['estado'],
+      'proUbicacion' => $data['ubicacion'],
+      'proImagen' => $data['estado'],
+      'proFechaModificacion' => $data['estado'],
+      'proTipoDescarga' => $data['estado'],
+      'proReferencia' => $data['estado'],
+      'proLote' => $data['estado'],
+      'proIdUsuario' => $data['estado'],
+      'sucursal' => $data['estado']
     );
 
       if(!Func::all_full($i)) {
@@ -64,24 +77,38 @@ final class Producto extends Models implements OCREND {
   # Editar un elemento
   final public function editar(array $data) : array {
 
-    $this->id = $this->db->scape($data['id']);
+    $this->id = $this->db->scape($data['proCodigoBarra']);
 
     $error = $this->errores($data);
     if(false !== $error) {
       return $error;
     }
 
-    /*$i = array(
-      'ejemplo' => $data['ejemplo']
+    $i = array(
+      'proNombre' => $data['nombre'],
+      'proMarCodigo' => $data['marca'],
+      'proValorCompra' => $data['valorcompra'],
+      'proStockMinimo' => $data['stockminimo'],
+      'proStockBodega' => $data['stockbodega'],
+      'proGruCodigo' => $data['categoria'],
+      'proEstado' => $data['estado'],
+      'proUbicacion' => $data['ubicacion'],
+      'proImagen' => $data['estado'],
+      'proFechaModificacion' => $data['estado'],
+      'proTipoDescarga' => $data['estado'],
+      'proReferencia' => $data['estado'],
+      'proLote' => $data['estado'],
+      'proIdUsuario' => $data['estado'],
+      'sucursal' => $data['estado']
     );
-    $this->db->update('producto',$i,"id='$this->id'",'LIMIT 1');*/
+    $this->db->update('producto',$i,"proCodigoBarra='$this->id'",'LIMIT 1');
 
     return array('success' => 1, 'message' => '<b>Editado</b> con éxito.');
   }
 
   # Borrar un elemento
-  final public function borrar($id) {
-    $this->id = $this->db->scape($id);
+  final public function borrar() {
+    $this->id = $this->db->scape($this->id);
     $i = array(
       'proEstado' => "IN"
     );
