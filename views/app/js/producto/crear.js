@@ -34,3 +34,30 @@ $('#producto').click(function(){
     }
   });
 });
+
+  var rowlote='<hr/><div class="row"><div class="col-lg-4 form-group">'
+                          +'<label class="cole">Código:</label>'
+                          +'<input type="text" class="form-control form-input" name="codlote" placeholder="Escriba el código..." />'
+                        +'</div>'
+
+                        +'<div class="col-lg-4 form-group">'
+                          +'<label class="cole">Cantidad:</label>'
+                          +'<input type="text" class="form-control form-input" name="cantidad" placeholder="Escriba la cantidad..." />'
+                        +'</div>'
+
+                        +'<div class="col-lg-4 form-group">'
+                          +'<label class="cole">Fecha Vencimiento:</label>'
+                          +'<input type="text" class="form-control form-input" name="fechavencimiento" placeholder="Escriba la fecha vencimiento del lote..." />'
+                        +'</div>'
+
+                        +'</div>';
+$("#addLotes").click(function(){
+  $(".pnlLotes").append(rowlote);
+  $("#lotmultiple").val("S");
+});
+
+$("#remLotes").click(function(){
+  $(".pnlLotes").html("");
+  $("#lotmultiple").val("N");
+  
+});

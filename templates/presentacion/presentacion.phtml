@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-12">
           
-            <h1 class="page-title">{{model}}</h1>
+            <h1 class="page-title">Presentacion</h1>
 
             <h2>Listado</h2>
             
@@ -27,6 +27,9 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Estado</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -38,6 +41,9 @@
                       <tfoot>
                         <tr>
                           <th>#</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Estado</th>
                           <?php  if(false!=$edita): ?>
                           <th></th>
                           <?php  endif ?>
@@ -50,18 +56,21 @@
                         <?php foreach(false != $data ? $data : array() as $d): ?>
                         <tr>
                           <td><?= $d['id'] ?></td>
+                          <td><?= $d['prenombre'] ?></td>
+                          <td><?= $d['predescripcion'] ?></td>
+                          <td><?= $d['preestado']=='AC'?'Activo':'Inactivo' ?></td>
                           <?php  if(false!=$edita): ?>
-                          <td><a href="{{action}}/editar/<?= $d['id'] ?>">Editar</a></td>
+                          <td><a href="presentacion/editar/<?= $d['id'] ?>">Editar</a></td>
                           <?php  endif ?>
                           <?php  if(false!=$elimina): ?>
-                          <td><a href="{{action}}/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
+                          <td><a href="presentacion/eliminar/<?= $d['id'] ?>">Eliminar</a></td>
                           <?php  endif ?>
                         </tr>
                         <?php endforeach ?>
                         </tbody>
                     </table>
                 <?php  if(false!=$crea): ?>
-                <a class="btn btn-primary" href="{{action}}/crear">Crear</a>
+                <a class="btn btn-primary" href="presentacion/crear">Crear</a>
                 <?php  endif ?>
               </div>
             </div>

@@ -184,11 +184,6 @@ final class Users extends Models implements OCREND {
     
     return $this->db->select('rolid,rolname','role',"rolestado='AC'");
   }
-  # Leer sucursales
-  final public function getSucursales() {
-    
-    return $this->db->select('id,sucname','sucursal',"1=1");
-  }
 
   public function __destruct() {
     parent::__destruct();

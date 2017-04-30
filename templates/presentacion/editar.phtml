@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-12">
           
-            <h1 class="page-title">Categoria</h1>
+            <h1 class="page-title">Presentacion</h1>
 
             <h2>Edición</h2>
             
@@ -22,22 +22,23 @@
             <div class="well col-lg-8">
               <div class="form-actions">
                 <div class="panel panel-default">
-                  <div class="panel-heading">Editar Categoria</div>
+                  <div class="panel-heading">Editar Presentacion</div>
                   <div class="panel-body">
 
-                    <form id="categoria_form" role="form">
+                    <form id="presentacion_form" role="form">
 
-                      <input type="hidden" name="id" value="<?= $data['catcodigo'] ?>" />
+                      <input type="hidden" name="id" value="<?= $data['id'] ?>" />
 
-                      <div class="alert hide" id="ajax_categoria"></div>
+                      <div class="alert hide" id="ajax_presentacion"></div>
+                      
                       <div class="col-lg-6 form-group">
                         <label class="cole">Nombre:</label>
-                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['catnombre'] ?>" placeholder="Escribe el nombre..." />
+                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['prenombre'] ?>" placeholder="Escribe el nombre..." />
                       </div>
                       
                       <div class="col-lg-6 form-group">
                         <label class="cole">Estado:</label>
-                        <select class="form-control" name="estado" value="<?= $data['catestado'] ?>">
+                        <select class="form-control" name="estado" value="<?= $data['preestado'] ?>">
                           <option value="AC">Activo</option>
                           <option value="IN">Inactivo</option>
                         </select> 
@@ -45,11 +46,11 @@
                       
                       <div class="col-lg-6 form-group">
                         <label class="cole">Descripción:</label>
-                        <textarea class="form-control form-input" name="descripcion" placeholder="Escribe la descripción..." rows="3"><?= $data['catdescripcion'] ?></textarea>
+                        <textarea class="form-control form-input" name="descripcion"  placeholder="Escribe la descripción..." rows="3"><?= $data['predescripcion'] ?></textarea>
                       </div>
                       <div class="col-lg-12">
                         <div class="form-group">
-                          <button type="button" id="categoria" class="btn btn-primary  center-block">Enviar</button>
+                          <button type="button" id="presentacion" class="btn btn-primary  center-block">Enviar</button>
                         </div>
                       </div>
                     </form>
@@ -57,7 +58,7 @@
                   </div>
                 </div>
               </div>
-              <a class="btn btn-primary" href="categoria">Ver listado</a>
+              <a class="btn btn-primary" href="presentacion">Ver listado</a>
             </div>
             <div class="col-lg-2"></div> 
 
@@ -72,7 +73,7 @@
   </div>
 
 <?= $this->insert('overall/footer')?>
-<script src="views/app/js/categoria/editar.js"></script>
+<script src="views/app/js/presentacion/editar.js"></script>
 </body>
 
 </html>

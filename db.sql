@@ -21,21 +21,29 @@ USE `inventariofarmacia`;
 DROP TABLE IF EXISTS `auditoria`;
 
 CREATE TABLE `auditoria` (
-  `Codigo` int(11) NOT NULL AUTO_INCREMENT,
-  `Fecha` date DEFAULT NULL,
-  `Hora` time DEFAULT NULL,
-  `Accion` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `Usuario` int(11) DEFAULT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `accion` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
   `sucursal` int(11) DEFAULT NULL,
   `producto` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  PRIMARY KEY (`Codigo`),
-  KEY `Usuario` (`Usuario`),
+  PRIMARY KEY (`codigo`),
+  KEY `Usuario` (`usuario`),
   CONSTRAINT `auditoria_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `users` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*Data for the table `auditoria` */
+/*Table structure for table `categoria` */
 
-insert  into `auditoria`(`Codigo`,`Fecha`,`Hora`,`Accion`,`Usuario`,`sucursal`,`producto`) values (1,'2014-03-17',NULL,NULL,NULL,NULL,NULL),(2,'2014-03-17',NULL,NULL,NULL,NULL,NULL),(3,'2014-03-17','07:58:54',NULL,NULL,NULL,NULL),(4,'2014-03-17','08:00:24','Insertar',NULL,NULL,NULL),(5,'2014-03-20','07:50:25','Insertar',NULL,NULL,NULL),(6,'2014-03-23','21:49:37','Insertar',NULL,NULL,NULL),(16,'2015-11-22','16:39:39','Insertar',NULL,NULL,NULL);
+DROP TABLE IF EXISTS `categoria`;
+
+CREATE TABLE `categoria` (
+  `catcodigo` int(11) NOT NULL AUTO_INCREMENT,
+  `catnombre` varchar(50) NOT NULL,
+  `catdescripcion` varchar(100) DEFAULT NULL,
+  `catestado` varchar(2) DEFAULT 'AC',
+  PRIMARY KEY (`catcodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `empresa` */
 
@@ -49,59 +57,55 @@ CREATE TABLE `empresa` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-/*Data for the table `empresa` */
+/*Table structure for table `laboratorio` */
 
-insert  into `empresa`(`id`,`empname`,`empdesc`,`empnit`) values (1,'La central del remedio','Farmacia novedosa y emprendedora','1234');
+DROP TABLE IF EXISTS `laboratorio`;
 
-/*Table structure for table `grupo` */
-
-DROP TABLE IF EXISTS `grupo`;
-
-CREATE TABLE `grupo` (
-  `gruCodigo` int(11) NOT NULL AUTO_INCREMENT,
-  `gruNombre` varchar(50) NOT NULL,
-  `gruDescripcion` varchar(100) DEFAULT NULL,
-  `gruEstado` varchar(2) DEFAULT 'AC',
-  PRIMARY KEY (`gruCodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
-/*Data for the table `grupo` */
-
-insert  into `grupo`(`gruCodigo`,`gruNombre`,`gruDescripcion`,`gruEstado`) values (1,'Materiales de construcción','Materiales de construcción','IN'),(2,'Pinturas',NULL,'AC'),(3,'Herramientas',NULL,'AC'),(4,'Sanitario',NULL,'AC'),(5,'El?ctricos',NULL,'AC'),(6,'Pegantes',NULL,'AC'),(7,'Torniller?a',NULL,'AC');
+CREATE TABLE `laboratorio` (
+  `labcodigo` int(11) NOT NULL AUTO_INCREMENT,
+  `labnombre` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `labdescripcion` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
+  `labestado` varchar(2) CHARACTER SET latin1 DEFAULT 'AC',
+  PRIMARY KEY (`labcodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `lotes` */
 
 DROP TABLE IF EXISTS `lotes`;
 
 CREATE TABLE `lotes` (
-  `lotid` int(11) NOT NULL,
+  `lotid` int(11) NOT NULL AUTO_INCREMENT,
   `lotfechavenc` date DEFAULT NULL,
   `lotcantidad` int(11) DEFAULT NULL,
-  `lotpiva` double DEFAULT NULL,
-  `lotiva` double DEFAULT NULL,
   `lotcoba` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `lotcodigo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Código del lote',
+  `lotvalorcompra` double DEFAULT NULL,
+  `lotvalorventa` int(11) DEFAULT NULL,
+  `lotfechaingreso` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `lotproveedor` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`lotid`),
-  KEY `lotcoba` (`lotcoba`),
-  CONSTRAINT `lotes_ibfk_1` FOREIGN KEY (`lotcoba`) REFERENCES `producto` (`proCodigoBarra`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `lotes_ibfk_1` (`lotcoba`),
+  KEY `lotes_ibfk_2` (`lotproveedor`),
+  CONSTRAINT `lotes_ibfk_1` FOREIGN KEY (`lotcoba`) REFERENCES `producto` (`proCodigoBarra`) ON UPDATE CASCADE,
+  CONSTRAINT `lotes_ibfk_2` FOREIGN KEY (`lotproveedor`) REFERENCES `proveedor` (`prvNit`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `lotes` */
+/*Table structure for table `movimientos` */
 
-/*Table structure for table `marca` */
+DROP TABLE IF EXISTS `movimientos`;
 
-DROP TABLE IF EXISTS `marca`;
-
-CREATE TABLE `marca` (
-  `marCodigo` int(11) NOT NULL AUTO_INCREMENT,
-  `marNombre` varchar(100) NOT NULL,
-  `marDescripcion` varchar(200) DEFAULT NULL,
-  `marEstado` varchar(2) DEFAULT 'AC',
-  PRIMARY KEY (`marCodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
-/*Data for the table `marca` */
-
-insert  into `marca`(`marCodigo`,`marNombre`,`marDescripcion`,`marEstado`) values (1,'Genfar',NULL,'AC'),(2,'JGB',NULL,'AC'),(3,'MK','Productos totalmente confiables','AC');
+CREATE TABLE `movimientos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iduser` int(11) DEFAULT NULL,
+  `idproducto` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `accion` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fkproducto` (`idproducto`),
+  KEY `iduser` (`iduser`),
+  CONSTRAINT `fkproducto` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`proCodigoBarra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `notificaciones` */
 
@@ -119,8 +123,6 @@ CREATE TABLE `notificaciones` (
   PRIMARY KEY (`noticodigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*Data for the table `notificaciones` */
-
 /*Table structure for table `paginas` */
 
 DROP TABLE IF EXISTS `paginas`;
@@ -134,10 +136,6 @@ CREATE TABLE `paginas` (
   `nivel` float DEFAULT NULL,
   PRIMARY KEY (`pagid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
-/*Data for the table `paginas` */
-
-insert  into `paginas`(`pagid`,`pagname`,`pagurl`,`pagicono`,`pagestado`,`nivel`) values (1,'Listado de usuarios','users','ICONO1','A',1.1),(2,'Crear Usuarios','users/crear','ICONO2','A',1.2),(3,'Gestion de usuarios','#','glyphicon glyphicon-user','A',1),(4,'Gestion de roles','#','glyphicon glyphicon-user','A',2),(5,'Listado','role',NULL,'A',2.1),(6,'Crear','role/crear',NULL,'A',2.2),(7,'Opciones generales','#','glyphicon glyphicon-user','A',3),(8,'Listado empresas','empresa','','A',3.1),(9,'Crear empresa','empresa/crear',NULL,'A',3.2),(10,'Listado de sucursales','sucursal',NULL,'A',3.3),(11,'Crear sucursal','sucursal/crear',NULL,'A',3.4),(12,'Permisos','permisos',NULL,'A',2.3);
 
 /*Table structure for table `permisos` */
 
@@ -154,44 +152,72 @@ CREATE TABLE `permisos` (
   CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`perpag`) REFERENCES `paginas` (`pagid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*Data for the table `permisos` */
+/*Table structure for table `presentacion` */
 
-insert  into `permisos`(`perpag`,`peridrol`,`peredita`,`perelimina`) values (1,1,'S','N'),(2,1,'N','N'),(3,1,'N','N'),(4,1,'N','N'),(5,1,'N','N'),(6,1,'N','N'),(7,1,'N','N'),(8,1,'N','N'),(9,1,'N','N'),(10,1,'N','N'),(12,1,'N','N'),(1,3,'N','S'),(2,3,'S','S');
+DROP TABLE IF EXISTS `presentacion`;
+
+CREATE TABLE `presentacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `prenombre` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `predescripcion` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `preestado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `producto` */
 
 DROP TABLE IF EXISTS `producto`;
 
 CREATE TABLE `producto` (
-  `proCodigoBarra` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `proNombre` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `proMarCodigo` int(11) DEFAULT NULL,
-  `proValorCompra` int(30) DEFAULT NULL,
-  `proStockMinimo` int(99) DEFAULT NULL,
-  `proStockBodega` int(100) DEFAULT NULL,
-  `proGruCodigo` int(11) DEFAULT NULL,
-  `proEstado` varchar(2) CHARACTER SET latin1 NOT NULL DEFAULT 'AC' COMMENT 'AC=Activo, IN=Inactivo',
-  `proFechaIngreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `proUbicacion` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `proImagen` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
-  `proFechaModificacion` date DEFAULT NULL,
-  `proTipoDescarga` int(11) DEFAULT NULL,
-  `proReferencia` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
-  `proLote` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
-  `proIdUsuario` int(11) DEFAULT NULL COMMENT 'Usuario que modifica',
-  `sucursal` int(11) DEFAULT NULL,
-  PRIMARY KEY (`proCodigoBarra`),
-  KEY `proMarCodigo` (`proMarCodigo`),
-  KEY `proGruCodigo` (`proGruCodigo`),
-  KEY `proTipoDescarga` (`proTipoDescarga`),
-  KEY `sucursal` (`sucursal`),
-  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`proMarCodigo`) REFERENCES `marca` (`marCodigo`),
-  CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`proGruCodigo`) REFERENCES `grupo` (`gruCodigo`),
-  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`proTipoDescarga`) REFERENCES `tipodescarga` (`tideCodigo`),
-  CONSTRAINT `producto_ibfk_4` FOREIGN KEY (`sucursal`) REFERENCES `sucursal` (`id`)
+  `procodigobarra` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `pronombre` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `prolaboratorio` int(11) DEFAULT NULL COMMENT 'Código del laboratorio',
+  `provalorventa` int(30) DEFAULT NULL,
+  `prostockminimo` int(99) DEFAULT NULL,
+  `prostockbodega` int(100) DEFAULT NULL,
+  `procategoria` int(11) DEFAULT NULL COMMENT 'Código de la categoria',
+  `proestado` varchar(2) CHARACTER SET latin1 NOT NULL DEFAULT 'AC' COMMENT 'AC=Activo, IN=Inactivo',
+  `profechaingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `proubicacion` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `proimagen` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
+  `profechamodificacion` date DEFAULT NULL,
+  `prounidadmedida` int(11) DEFAULT NULL,
+  `proreferencia` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
+  `proidusuario` int(11) DEFAULT NULL COMMENT 'Usuario que modifica',
+  `prosucursal` int(11) NOT NULL,
+  `proiva` double DEFAULT NULL COMMENT 'Porcentaje de iva',
+  `proprincipioactivo` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Principio activo',
+  `propresentacion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`procodigobarra`,`prosucursal`),
+  KEY `proMarCodigo` (`prolaboratorio`),
+  KEY `proGruCodigo` (`procategoria`),
+  KEY `proTipoDescarga` (`prounidadmedida`),
+  KEY `proIdUsuario` (`proidusuario`),
+  KEY `sucursal` (`prosucursal`),
+  KEY `proPresentacion` (`propresentacion`),
+  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`prolaboratorio`) REFERENCES `laboratorio` (`labcodigo`),
+  CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`procategoria`) REFERENCES `categoria` (`catcodigo`),
+  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`prounidadmedida`) REFERENCES `unidadmedida` (`tideCodigo`),
+  CONSTRAINT `producto_ibfk_5` FOREIGN KEY (`proIdUsuario`) REFERENCES `users` (`userid`),
+  CONSTRAINT `producto_ibfk_6` FOREIGN KEY (`prosucursal`) REFERENCES `sucursal` (`id`),
+  CONSTRAINT `producto_ibfk_7` FOREIGN KEY (`proPresentacion`) REFERENCES `presentacion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `producto` */
+/*Table structure for table `proveedor` */
+
+DROP TABLE IF EXISTS `proveedor`;
+
+CREATE TABLE `proveedor` (
+  `prvnit` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `prvnombre` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prvdireccion` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prvtelefono` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prvcorreo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prvsitioweb` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prvfechaingreso` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `prvestado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'AC, IN',
+  PRIMARY KEY (`prvnit`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `role` */
 
@@ -204,10 +230,6 @@ CREATE TABLE `role` (
   `rolestado` varchar(2) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'AC',
   PRIMARY KEY (`rolid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
-/*Data for the table `role` */
-
-insert  into `role`(`rolid`,`rolname`,`roldesc`,`rolestado`) values (1,'ADMINISTRADOR','ADMINISTRADOR DEL SISTEMA','AC'),(2,'AUXILIAR','AUXILIAR DE CONTABILIDAD','AC'),(3,'VENTAS','','AC');
 
 /*Table structure for table `roleusr` */
 
@@ -222,10 +244,6 @@ CREATE TABLE `roleusr` (
   KEY `ruroleid` (`ruroleid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*Data for the table `roleusr` */
-
-insert  into `roleusr`(`ruid`,`ruuserid`,`ruroleid`) values (17,19,1),(18,19,2);
-
 /*Table structure for table `sucursal` */
 
 DROP TABLE IF EXISTS `sucursal`;
@@ -238,30 +256,23 @@ CREATE TABLE `sucursal` (
   `suctel` varchar(50) DEFAULT NULL,
   `empresa` int(11) DEFAULT NULL,
   `principal` int(11) DEFAULT '0',
+  `estado` varchar(2) DEFAULT NULL COMMENT 'AC, IN',
   PRIMARY KEY (`id`),
   KEY `empresa` (`empresa`),
   CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`empresa`) REFERENCES `empresa` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-/*Data for the table `sucursal` */
+/*Table structure for table `unidadmedida` */
 
-insert  into `sucursal`(`id`,`sucname`,`sucdesc`,`sucdir`,`suctel`,`empresa`,`principal`) values (1,'Sede Villa zambreano','Primera sucursal','Calle 123','3925222',1,1),(2,'Sede centro','Nueva sede','Calle 70 # 2-19','300321',1,0);
+DROP TABLE IF EXISTS `unidadmedida`;
 
-/*Table structure for table `tipodescarga` */
-
-DROP TABLE IF EXISTS `tipodescarga`;
-
-CREATE TABLE `tipodescarga` (
-  `tideCodigo` int(11) NOT NULL AUTO_INCREMENT,
-  `tideNombre` varchar(100) NOT NULL,
-  `tideDescripcion` varchar(200) DEFAULT NULL,
-  `tideEstado` varchar(2) DEFAULT 'AC',
-  PRIMARY KEY (`tideCodigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
-/*Data for the table `tipodescarga` */
-
-insert  into `tipodescarga`(`tideCodigo`,`tideNombre`,`tideDescripcion`,`tideEstado`) values (1,'Unidad',NULL,'AC'),(2,'Gramos',NULL,'AC'),(3,'Mililitros',NULL,'AC');
+CREATE TABLE `unidadmedida` (
+  `undcodigo` int(11) NOT NULL AUTO_INCREMENT,
+  `undnombre` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `unddescripcion` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `undestado` varchar(2) CHARACTER SET utf8 DEFAULT 'AC',
+  PRIMARY KEY (`undcodigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `users` */
 
@@ -291,44 +302,36 @@ CREATE TABLE `users` (
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`sucursal`) REFERENCES `sucursal` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-/*Data for the table `users` */
-
-insert  into `users`(`username`,`userpass`,`userdoc`,`userid`,`userusu`,`usertele`,`userdir`,`usercorreo`,`userestado`,`keypass`,`keypass_tmp`,`session`,`rol`,`sucursal`) values ('JESÚS MENDOZA','$2a$10$1678a2a3409f453608e54urdbutdZFr0MASRFja6.YXzt0GaAM7Z2','1042450864',19,'JMEN','3002119842','Calle 70 # 2-19 2','jmen95@misena.edu.co','AC',0,'',1484435185,1,NULL),('Mendoza','$2a$10$236c4c2076cb550299af3uSpItfj0GHioCp2vfBFxC0sq5euA876C','1234',21,'xile','3004355896','Calle 70 # 2-19','xilenemendoza@gmail.com','AC',0,'',0,1,1),('Walter Martinez','$2a$10$5e2a0f4e877c2a0a4b48buGL99D/pE5wbXoFqeAsVmp8xsVwjC/xS','123',22,'wmartinez','3017485','calle falsa 123','g7wal@gmail.com','AC',0,'',0,1,1);
-
 /*Table structure for table `venta` */
 
 DROP TABLE IF EXISTS `venta`;
 
 CREATE TABLE `venta` (
-  `ventId` int(11) NOT NULL AUTO_INCREMENT,
-  `ventCostoTotal` int(11) NOT NULL,
-  `venFechaRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ventId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `venta` */
+  `ventid` int(11) NOT NULL AUTO_INCREMENT,
+  `ventcostototal` int(11) NOT NULL,
+  `venfecharegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ventid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Table structure for table `ventadetalle` */
 
 DROP TABLE IF EXISTS `ventadetalle`;
 
 CREATE TABLE `ventadetalle` (
-  `vedeId` int(11) NOT NULL AUTO_INCREMENT,
-  `vedeIdVenta` int(11) NOT NULL,
-  `vedeCodigoBarrasProducto` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `vedeNombreProducto` varchar(700) COLLATE utf8_spanish2_ci NOT NULL,
-  `vedePrecioVentaUnitarioProducto` int(11) NOT NULL,
-  `vedeCantidad` int(11) NOT NULL,
-  `vedeTotalPrecioVenta` int(11) NOT NULL,
-  `vedeDescuentoint` int(11) DEFAULT NULL,
-  PRIMARY KEY (`vedeId`),
-  KEY `vedeIdVenta` (`vedeIdVenta`),
-  KEY `vedeCodigoBarrasProducto` (`vedeCodigoBarrasProducto`),
+  `vedeid` int(11) NOT NULL AUTO_INCREMENT,
+  `vedeidventa` int(11) DEFAULT NULL,
+  `vedecodigobarras` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `vedenombreproducto` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `vedepreciound` double DEFAULT NULL COMMENT 'precio de venta unitario',
+  `vedecantidad` int(11) DEFAULT NULL,
+  `vedetotalprecio` double DEFAULT NULL COMMENT 'precio de venta total',
+  `vededescuento` double DEFAULT NULL,
+  PRIMARY KEY (`vedeid`),
+  KEY `vedeIdVenta` (`vedeidventa`),
+  KEY `vedeCodigoBarrasProducto` (`vedecodigobarras`),
   CONSTRAINT `ventadetalle_ibfk_1` FOREIGN KEY (`vedeIdVenta`) REFERENCES `venta` (`ventId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ventadetalle_ibfk_2` FOREIGN KEY (`vedeCodigoBarrasProducto`) REFERENCES `producto` (`proCodigoBarra`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `ventadetalle_ibfk_2` FOREIGN KEY (`vedecodigobarras`) REFERENCES `producto` (`proCodigoBarra`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
-/*Data for the table `ventadetalle` */
 
 /* Trigger structure for table `producto` */
 
@@ -337,34 +340,9 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insertarPro` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insertarPro` AFTER INSERT ON `producto` FOR EACH ROW BEGIN
-    INSERT INTO auditoria(Fecha,Hora,Accion,producto,sucursal) VALUES (CURDATE(),curtime(),"Insertar",NEW.proCodigoBarra,NEW.sucursal);
+    INSERT INTO auditoria(fecha,hora,accion,producto,sucursal) VALUES (CURDATE(),curtime(),"Insertar",NEW.proCodigoBarra,NEW.prosucursal);
     insert into movimientos values(0,NEW.proIdUsuario,NEW.proCodigoBarra,"Agregado",new.proStockBodega);
 END */$$
-
-
-DELIMITER ;
-
-/* Trigger structure for table `producto` */
-
-DELIMITER $$
-
-/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `actualizarPro` */$$
-
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `actualizarPro` AFTER UPDATE ON `producto` FOR EACH ROW BEGIN
-	DECLARE cantidad int;
-	DECLARE accion varchar(100);
-	INSERT INTO auditoria(Fecha,Hora,Accion,producto,sucursal) VALUES (CURDATE(),CURTIME(),"Actualizar",NEW.proCodigoBarra,NEW.sucursal);
-	IF OLD.proStockBodega<>new.proStockBodega THEN
-		IF OLD.proStockBodega>NEW.proStockBodega THEN
-			SET accion="Egreso";
-			set cantidad=OLD.proStockBodega-NEW.proStockBodega;
-		ELSE
-			SET accion="Ingreso";
-			SET cantidad=NEW.proStockBodega-OLD.proStockBodega;
-		END IF;
-		INSERT INTO movimientos VALUES(0,NEW.proIdUsuario,proCodigoBarra,accion,cantidad);
-	END IF;
-    END */$$
 
 
 DELIMITER ;

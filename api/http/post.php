@@ -262,3 +262,51 @@ $app->post('/producto/crear',function($request, $response) {
 
 	return $response;
 });
+
+/**
+	* ¿que hace (el modelo que se invoca desde aqui)?
+	* @return Devuelve un json con información acerca del éxito o posibles errores. 
+*/
+$app->post('/presentacion/editar',function($request, $response) {
+
+	$model = new Presentacion;
+	$response->withJson($model->editar($_POST));
+
+	return $response;
+});
+
+/**
+	* ¿que hace (el modelo que se invoca desde aqui)?
+	* @return Devuelve un json con información acerca del éxito o posibles errores. 
+*/
+$app->post('/presentacion/crear',function($request, $response) {
+
+	$model = new Presentacion;
+	$response->withJson($model->crear($_POST));
+
+	return $response;
+});
+
+/**
+	* ¿que hace (el modelo que se invoca desde aqui)?
+	* @return Devuelve un json con información acerca del éxito o posibles errores. 
+*/
+$app->post('/proveedor/editar',function($request, $response) {
+
+	$model = new Proveedor;
+	$response->withJson($model->editar($_POST));
+
+	return $response;
+});
+
+/**
+	* ¿que hace (el modelo que se invoca desde aqui)?
+	* @return Devuelve un json con información acerca del éxito o posibles errores. 
+*/
+$app->post('/proveedor/crear',function($request, $response) {
+
+	$model = new Proveedor;
+	$response->withJson($model->crear($_POST));
+
+	return $response;
+});

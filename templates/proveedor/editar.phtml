@@ -1,0 +1,101 @@
+<?= $this->insert('overall/header')?>
+
+<body>
+
+<?= $this->insert('overall/topnav')?>
+
+  <div class="ts-main-content">
+
+    <?= $this->insert('overall/menu')?>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12">
+          
+            <h1 class="page-title">Proveedor</h1>
+
+            <h2>Edición</h2>
+            
+            <div class="col-lg-2"></div>
+            <div class="well col-lg-8">
+              <div class="form-actions">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Editar Proveedor</div>
+                  <div class="panel-body">
+
+                    <form id="proveedor_form" role="form">
+
+                      <input type="hidden" name="nit" value="<?= $data['prvnit'] ?>" />
+
+                      <div class="alert hide" id="ajax_proveedor"></div>
+
+                      
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nit:</label>
+                        <input type="text" class="form-control form-input" readonly="true" disabled="true" name="nit2" value="<?= $data['prvnit'] ?>" placeholder="Escribe el nit..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Nombre:</label>
+                        <input type="text" class="form-control form-input" name="nombre" value="<?= $data['prvnombre'] ?>" placeholder="Escribe el nombre..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Dirección:</label>
+                        <input type="text" class="form-control form-input" name="direccion" value="<?= $data['prvdireccion'] ?>" placeholder="Escribe la dirección..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Teléfono:</label>
+                        <input type="text" class="form-control form-input" name="telefono" value="<?= $data['prvtelefono'] ?>" placeholder="Escribe el teléfono..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Correo electrónico:</label>
+                        <input type="text" class="form-control form-input" name="correo" value="<?= $data['prvcorreo'] ?>" placeholder="Escribe el correo electrónico..." />
+                      </div>
+
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Sitio web:</label>
+                        <input type="text" class="form-control form-input" name="web" value="<?= $data['prvsitioweb'] ?>" placeholder="Escribe la página web..." />
+                      </div>
+                      
+                      <div class="col-lg-4 form-group">
+                        <label class="cole">Estado:</label>
+                        <select class="form-control" name="estado" value="<?= $data['prvestado'] ?>">
+                          <option value="AC">Activo</option>
+                          <option value="IN">Inactivo</option>
+                        </select> 
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <button type="button" id="proveedor" class="btn btn-primary  center-block">Enviar</button>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary" href="proveedor">Ver listado</a>
+            </div>
+            <div class="col-lg-2"></div> 
+
+            
+          </div>
+        </div>
+        
+        <?= $this->insert('overall/inner_footer')?>
+
+      </div>
+    </div>
+  </div>
+
+<?= $this->insert('overall/footer')?>
+<script src="views/app/js/proveedor/editar.js"></script>
+</body>
+
+</html>

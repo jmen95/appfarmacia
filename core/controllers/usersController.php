@@ -12,6 +12,8 @@ class usersController extends Controllers {
 
     $m = new Users;
 
+    $g = new General;
+
     switch($this->method) {
       case 'crear':
         Helper::load('bootstrap');
@@ -19,8 +21,8 @@ class usersController extends Controllers {
         foreach ($m->getRolesActivos() as $rol) {
           $roles[$rol['rolid']]=$rol['rolname'];
         }
-         $sucursal = array('' =>'Seleccione una');
-        foreach ($m->getSucursales() as $suc) {
+        $sucursal = array('' =>'Seleccione una');
+        foreach ($g->getSucursalesActivas() as $suc) {
           $sucursal[$suc['id']]=$suc['sucname'];
         }
          
@@ -37,7 +39,7 @@ class usersController extends Controllers {
             $roles[$rol['rolid']]=$rol['rolname'];
           }
            $sucursal = array('' =>'Seleccione una');
-          foreach ($m->getSucursales() as $suc) {
+          foreach ($g->getSucursalesActivas() as $suc) {
             $sucursal[$suc['id']]=$suc['sucname'];
           }
           echo $this->template->render('users/editar', array(

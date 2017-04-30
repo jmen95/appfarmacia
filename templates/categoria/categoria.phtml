@@ -55,15 +55,15 @@
                       <tbody>
                         <?php foreach(false != $data ? $data : array() as $d): ?>
                         <tr>
-                          <td><?= $d['gruCodigo'] ?></td>
-                          <td><?= $d['gruNombre'] ?></td>
-                          <td><?= $d['gruDescripcion'] ?></td>
-                          <td><?= $d['gruEstado']=='AC'?'Activo':'Inactivo' ?></td>
+                          <td><?= $d['catcodigo'] ?></td>
+                          <td><?= $d['catnombre'] ?></td>
+                          <td><?= $d['catdescripcion'] ?></td>
+                          <td><?= $d['catestado']=='AC'?'Activo':'Inactivo' ?></td>
                           <?php  if(false!=$edita): ?>
-                          <td><a href="categoria/editar/<?= $d['gruCodigo'] ?>">Editar</a></td>
+                          <td><a href="categoria/editar/<?= $d['catcodigo'] ?>">Editar</a></td>
                           <?php  endif ?>
                           <?php  if(false!=$elimina): ?>
-                          <td><a href="categoria/eliminar/<?= $d['gruCodigo'] ?>">Eliminar</a></td>
+                          <td><a href="categoria/eliminar/<?= $d['catcodigo'] ?>">Eliminar</a></td>
                           <?php  endif ?>
                         </tr>
                         <?php endforeach ?>

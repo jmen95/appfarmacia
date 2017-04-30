@@ -5,7 +5,7 @@ defined('INDEX_DIR') OR exit('Ocrend software says .i.');
 
 //------------------------------------------------
 
-final class Categoria extends Models implements OCREND {
+final class Presentacion extends Models implements OCREND {
 
   public function __construct() {
     parent::__construct();
@@ -15,11 +15,10 @@ final class Categoria extends Models implements OCREND {
   final public function errores(array $data) {
     try {
 
-     $i = array(
-      'catnombre' => $data['nombre'],
-      'catdescripcion' => $data['descripcion'],
-      'catestado' => $data['estado']
-    );
+      $i = array(
+        'prenombre' => $data['nombre'],
+        'preestado' => $data['estado']
+      );
 
       if(!Func::all_full($i)) {
         throw new Exception('<b>Error:</b> Faltan datos por llenar.');
@@ -37,13 +36,13 @@ final class Categoria extends Models implements OCREND {
     if(false !== $error) {
       return $error;
     }
-
+    
     $i = array(
-      'catnombre' => $data['nombre'],
-      'catdescripcion' => $data['descripcion'],
-      'catestado' => $data['estado']
+      'prenombre' => $data['nombre'],
+      'predescripcion' => $data['descripcion'],
+      'preestado' => $data['estado']
     );
-    $this->db->insert('categoria',$i);
+    $this->db->insert('presentacion',$i);
 
     return array('success' => 1, 'message' => '<b>Creado</b> con éxito.');
   }
@@ -59,28 +58,28 @@ final class Categoria extends Models implements OCREND {
     }
 
     $i = array(
-      'catnombre' => $data['nombre'],
-      'catdescripcion' => $data['descripcion'],
-      'catestado' => $data['estado']
+      'prenombre' => $data['nombre'],
+      'predescripcion' => $data['descripcion'],
+      'preestado' => $data['estado']
     );
-    $this->db->update('categoria',$i,"catcodigo='$this->id'",'LIMIT 1');
+    $this->db->update('presentacion',$i,"id='$this->id'",'LIMIT 1');
 
     return array('success' => 1, 'message' => '<b>Editado</b> con éxito.');
   }
 
   # Borrar un elemento
   final public function borrar() {
-    $this->db->delete('categoria',"catcodigo='$this->id'");
-    Func::redir(URL . 'categoria/');
+    $this->db->delete('presentacion',"id='$this->id'");
+    Func::redir(URL . 'presentacion/');
   }
 
   # Leer uno o todos los elementos
   final public function leer(bool $multi = true) {
     if($multi) {
-      return $this->db->select('*','categoria');
+      return $this->db->select('*','presentacion');
     }
 
-    return $this->db->select('*','categoria',"catcodigo='$this->id'");
+    return $this->db->select('*','presentacion',"id='$this->id'");
   }
 
   public function __destruct() {
