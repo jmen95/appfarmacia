@@ -16,13 +16,13 @@ class productoController extends Controllers {
     switch($this->method) {
       case 'crear':
         Helper::load('bootstrap');
-        $marcas = array('' =>'Seleccione uno');
-        foreach ($m->getMarcasActivos() as $row) {
-          $marcas[$row['marCodigo']]=$row['marNombre'];
+        $laboratorios = array('' =>'Seleccione uno');
+        foreach ($m->getLaboratoriosActivos() as $row) {
+          $laboratorios[$row['labcodigo']]=$row['labnombre'];
         }
-        $grupos = array('' =>'Seleccione uno');
-        foreach ($m->getGruposActivos() as $row) {
-          $grupos[$row['gruCodigo']]=$row['gruNombre'];
+        $categorias = array('' =>'Seleccione uno');
+        foreach ($m->getCategoriasActivas() as $row) {
+          $categorias[$row['catcodigo']]=$row['catnombre'];
         }
         $unidades = array('' =>'Seleccione uno');
         foreach ($m->getUnidadesActivas() as $row) {
@@ -37,13 +37,14 @@ class productoController extends Controllers {
         $id_user=$m->getIdUsuario();
 
         echo $this->template->render('producto/crear',array(
-          'marcas' => $marcas, 
-          'grupos' => $grupos, 
+          'laboratorios' => $laboratorios, 
+          'categorias' => $categorias, 
           'unidades' => $unidades, 
           'sucursalUsuario' => $sucursalUsuario[0][0], 
           'sucursal' => $sucursal,
           'id_user' => $id_user
         ));
+        
       break;
       case 'editar':
         if($this->isset_id and false !== ($item = $m->leer(false))) {

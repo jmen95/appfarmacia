@@ -20,10 +20,10 @@ final class Login extends Models implements OCREND {
     try {
       Helper::load('strings');
       $this->user = $this->db->scape($data['user']);
-      $this->u = $this->db->select('userid,userpass,rol','users',"userusu='$this->user'",'LIMIT 1');
+      $this->u = $this->db->select('userid,userpass,rol','users',"userusu='$this->user' or userdoc='$this->user'",'LIMIT 1');
 
       if(false == $this->u or !Strings::chash($this->u[0][1],$data['pass'])) {
-        throw new Exception('<b>Error:</b> Credenciales incorrectas.');
+        throw new Exception('<b>Error:</b> Credenciales incorrectas. ');
       }
 
       if(DB_SESSION) {

@@ -171,21 +171,21 @@ final class Producto extends Models implements OCREND {
   }
 
   # Leer Marcas
-  final public function getMarcasActivos() {
+  final public function getLaboratoriosActivos() {
     
-    return $this->db->select('marCodigo,marNombre','marca',"marEstado='AC'");
+    return $this->db->select('labcodigo,labnombre','laboratorio',"labestado='AC'");
   }
 
   # Leer Grupos
-  final public function getGruposActivos() {
+  final public function getCategoriasActivas() {
     
-    return $this->db->select('gruCodigo,gruNombre','grupo',"gruEstado='AC'");
+    return $this->db->select('catcodigo,catnombre','categoria',"catestado='AC'");
   }
 
   # Leer unidades de medida
   final public function getUnidadesActivas() {
     
-    return $this->db->select('tideCodigo,tideNombre','tipodescarga',"tideEstado='AC'");
+    return $this->db->select('undcodigo,undnombre','unidadmedida',"undestado='AC'");
   }
 
   # Leer sucursal del usuario logueado
