@@ -1,204 +1,253 @@
-<?= $this->insert('overall/header')?>
+<?= $this->insert('overall/header') ?>
 
 <body>
 
-<?= $this->insert('overall/topnav')?>
+    <?= $this->insert('overall/topnav') ?>
 
-  <div class="ts-main-content">
+    <div class="ts-main-content">
 
-    <?= $this->insert('overall/menu')?>
+        <?= $this->insert('overall/menu') ?>
 
-    <div class="content-wrapper">
-      <div class="container-fluid">
+        <div class="content-wrapper">
+            <div class="container-fluid">
 
-        <div class="row">
-          <div class="col-md-12">
-          
-            <h1 class="page-title">Producto</h1>
+                <div class="row">
+                    <div class="col-md-12">
 
-            <h2>Creación</h2>
-            
-            <div class="col-lg-2"></div>
-            <div class="well col-lg-8">
-              <div class="form-actions">
-                <div class="panel panel-default">
-                  <div class="panel-heading">Crear Producto</div>
-                  <div class="panel-body">
-                    <form id="producto_form" role="form">
-                      <div class="alert hide" id="ajax_producto"></div>
+                        <h1 class="page-title">Producto</h1>
 
-                      <input type="hidden" name="idusuario" value="<?= $id_user ?>" />
-                      <input type="hidden" name="sucursal" value="<?= $sucursalUsuario ?>" />
-                      <input type="hidden" name="lotmultiple" id="lotmultiple" value="N" />
+                        <h2>Creación</h2>
 
-                      <div class="row">
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Código de barras:</label>
-                          <input type="text" class="form-control form-input" name="codigobarra" placeholder="Escriba el código de barras..." />
-                        </div>
-                        
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Nombre:</label>
-                          <input type="text" class="form-control form-input" name="nombre" placeholder="Escriba el nombre..." />
-                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="well col-lg-8">
+                            <div class="form-actions">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Crear Producto</div>
+                                    <div class="panel-body">
+                                        <form id="producto_form" role="form" enctype="multipart/form-data">
+                                            <div class="alert hide" id="ajax_producto"></div>
 
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Marca:</label>
-                          <?= Bootstrap::basic_select('marca',$laboratorios, false, '0', 'form-control') ?>
-                        </div>
+                                            <input type="hidden" name="idusuario" value="<?= $id_user ?>" />
+                                            <input type="hidden" name="sucursal" value="<?= $sucursalUsuario ?>" />
+                                            <input type="hidden" name="numlote" id="numlote" value="1" />
+                                            <input type="hidden" name="numprincipio" id="numprincipio" value="1" />
 
-                        
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Stock Mínimo:</label>
-                          <input type="text" class="form-control form-input" name="stockminimo" placeholder="Escriba la stock mínimo..." />
-                        </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Código de barras:</label>
+                                                    <input type="text" class="form-control form-input" name="codigobarra" placeholder="Escriba el código de barras..." />
+                                                </div>
 
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Categoria:</label>
-                          <?= Bootstrap::basic_select('categoria',$categorias, false, '0', 'form-control') ?>
-                        </div>                      
-                        
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Ubicacion:</label>
-                          <input type="text" class="form-control form-input" name="ubicacion" placeholder="Escriba la ubicacion..." />
-                        </div>
-                                              
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Unidad de medida:</label>
-                          <?= Bootstrap::basic_select('unidadmedida',$unidades, false, '0', 'form-control') ?>
-                        </div>
-                        
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Referencia:</label>
-                          <input type="text" class="form-control form-input" name="referencia" placeholder="Escriba la referencia..." />
-                        </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Nombre:</label>
+                                                    <input type="text" class="form-control form-input" name="nombre" placeholder="Escriba el nombre..." />
+                                                </div>
 
-                        
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Laboratorio:</label>
+                                                    <?= Bootstrap::basic_select('laboratorio', $laboratorios, false, '0', 'form-control') ?>
+                                                </div>
 
-                        <div class="col-lg-4 form-group hide">
-                          <label class="cole">Sucursal:</label>
-                          
-                          <?= Bootstrap::basic_select('sucursal2',$sucursal, false, '0', 'form-control') ?>
-                        </div>
+                                                <!--Start Princio activo-->
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                                    <div class = "panel panel-default">
+                                                        <div class = "panel-heading" role="tab" id="headingPrincipio">
+                                                            <h4 class  = "panel-title">
+                                                                <a role    = "button" data-toggle="collapse" href="#acorPrincipio" aria-expanded="true" aria-controls="acorPrincipio">
+                                                                    Principios activos
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="acorPrincipio" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingPrincipio">
+                                                            <div class = "panel-body">
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 form-group">
+                                                                        <label class="cole" for="id_principio1">Principios activo:</label>
+                                                                        <?= Bootstrap::basic_select('principio[]', $principio, false, '0', 'combobox-no-clean customcombobox principioactivo samename') ?>
+                                                                    </div>
+
+                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                                        <label class="cole">Concentración/Cantidad:</label>
+                                                                        <input type="text" class="form-control form-input" name="concentracion[]" placeholder="Escriba la concentración o la cantidad..." />
+                                                                    </div>
+
+                                                                    <div class="pnlPrincipio col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                                                                    <hr>
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                        <div class="form-group">
+                                                                            <button type="button" id="addPrincipio" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+
+                                                                            <button type="button" id="remPrincipio" class="btn btn-danger"><i class="fa fa-minus"></i> Remover</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--End Principio activo-->
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Forma farmacéutica:</label>
+                                                    <?= Bootstrap::basic_select('formafarmaceutica', $formafarmaceutica, false, '0', 'form-control') ?>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Presentacion:</label>
+                                                    <?= Bootstrap::basic_select('presentacion', $presentacion, false, '0', 'form-control') ?>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Contenido:</label>
+                                                    <?= Bootstrap::basic_select('contenido', $unidades, false, '0', 'form-control') ?>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Categoría:</label>
+                                                    <?= Bootstrap::basic_select('categoria', $categorias, false, '0', 'form-control') ?>
+                                                </div> 
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Referencia:</label>
+                                                    <input type="text" class="form-control form-input" name="referencia" placeholder="Escriba la referencia..." />
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Stock Mínimo:</label>
+                                                    <input type="text" class="form-control form-input" name="stockminimo" placeholder="Escriba la stock mínimo..." />
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Stock Máximo:</label>
+                                                    <input type="text" class="form-control form-input" name="stockmaximo" placeholder="Escriba la stock máximo..." />
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Estado:</label>
+                                                    <select class="form-control" name="estado">
+                                                        <option value="AC">Activo</option>
+                                                        <option value="IN">Inactivo</option>
+                                                    </select> 
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Ubicacion:</label>
+                                                    <input type="text" class="form-control form-input" name="ubicacion" placeholder="Escriba la ubicacion..." />
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                    <label class="cole">Iva:</label>
+                                                    <input type="text" class="form-control form-input" name="iva" placeholder="Escriba el iva en porcentaje..." />
+                                                </div>
 
 
-                        <div class="col-lg-4 form-group">
-                          <label class="cole">Estado:</label>
-                          <select class="form-control" name="estado">
-                            <option value="AC">Activo</option>
-                            <option value="IN">Inactivo</option>
-                          </select> 
-                        </div>
-                      </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group hide">
+                                                    <label class="cole">Sucursal:</label>
 
-                      <hr>
+                                                    <?= Bootstrap::basic_select('sucursal2', $sucursal, false, '0', 'form-control') ?>
+                                                </div>
 
-                      <div class = "panel panel-default">
-                        <div class = "panel-heading" role="tab" id="headingLotes">
-                          <h4 class  = "panel-title">
-                            <a role    = "button" data-toggle="collapse" href="#acorLotes" aria-expanded="true" aria-controls="acorLotes">
-                              Lotes
-                            </a>
-                          </h4>
-                        </div>
-                        <div id    = "acorLotes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingLotes">
-                          <div class = "panel-body">
-                            <div class="row">
 
-                              <div class="col-lg-4 form-group">
-                                <label class="cole">Código:</label>
-                                <input type="text" class="form-control form-input" name="codlote" placeholder="Escriba el código..." />
-                              </div>
 
-                              <div class="col-lg-4 form-group">
-                                <label class="cole">Cantidad:</label>
-                                <input type="text" class="form-control form-input" name="cantidad" placeholder="Escriba la cantidad..." />
-                              </div>
+                                            </div>
 
-                              <div class="col-lg-4 form-group">
-                                <label class="cole">Fecha Vencimiento:</label>
-                                <input type="text" class="form-control form-input" name="fechavencimiento" placeholder="Escriba la fecha vencimiento del lote..." />
-                              </div>
+                                            <hr>
 
-                              <div class="pnlLotes col-lg-12"></div>
+                                            <div class = "panel panel-default">
+                                                <div class = "panel-heading" role="tab" id="headingLotes">
+                                                    <h4 class  = "panel-title">
+                                                        <a role    = "button" data-toggle="collapse" href="#acorLotes" aria-expanded="true" aria-controls="acorLotes">
+                                                            Lotes
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id    = "acorLotes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingLotes">
+                                                    <div class = "panel-body">
+                                                        <div class="row">
 
-                              
-                              <div class="col-lg-12">
-                                <hr>
-                                <div class="row">
-                                  <div class="col-lg-3 form-group">
-                                    <label class="cole">Iva por:</label>
-                                    <select class="form-control" name="tipoiva">
-                                      <option value="P">%</option>
-                                      <option value="V">Valor</option>
-                                    </select> 
-                                  </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                                <label class="cole">Código:</label>
+                                                                <input type="text" class="form-control form-input" name="codlote[]" placeholder="Escriba el código..." />
+                                                            </div>
 
-                                  <div class="col-lg-3 form-group">
-                                    <label class="cole">Iva:</label>
-                                    <input type="text" class="form-control form-input" name="iva" placeholder="Escriba el valor o porcentaje del iva..." />
-                                  </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                                <label class="cole">Cantidad:</label>
+                                                                <input type="text" class="form-control form-input" name="cantidadlote[]" placeholder="Escriba la cantidad..." />
+                                                            </div>
 
-                                  <div class="col-lg-3 form-group">
-                                    <label class="cole">Vlr. Compra:</label>
-                                    <input type="text" class="form-control form-input" name="valorcompra" placeholder="Escriba el valor de compra del producto..." />
-                                  </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-group">
+                                                                <label class="cole">Fecha Vencimiento:</label>
+                                                                <input type="text" class="form-control form-input" name="fechavencimiento[]" placeholder="Escriba la fecha vencimiento del lote..." />
+                                                            </div>
 
-                                  <div class="col-lg-3 form-group">
-                                    <label class="cole">Vlr. Venta:</label>
-                                    <input type="text" class="form-control form-input" name="valorVenta" placeholder="Escriba el valor de venta del producto..." />
-                                  </div>
+                                                            <div class="pnlLotes col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <hr>
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                                                                        <label class="cole">Vlr. Compra:</label>
+                                                                        <input type="text" class="form-control form-input money" name="valorcompra" placeholder="Escriba el valor de compra del producto..." />
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                                                                        <label class="cole">Vlr. Venta:</label>
+                                                                        <input type="text" class="form-control form-input" name="valorVenta" placeholder="Escriba el valor de venta del producto..." />
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                            <hr>
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <button type="button" id="addLotes" class="btn btn-success"><i class="fa fa-plus"></i> Agregar lotes</button>
+
+                                                                    <button type="button" id="remLotes" class="btn btn-danger"><i class="fa fa-minus"></i> Remover lotes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <button type="button" id="producto" class="btn btn-primary  center-block">Enviar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                 </div>
 
-                              </div>
 
-
-
-                              <hr>
-                              <div class="col-lg-12">
-                                <div class="form-group">
-                                  <button type="button" id="addLotes" class="btn btn-success"><i class="fa fa-plus"></i> Agregar lotes</button>
-
-                                  <button type="button" id="remLotes" class="btn btn-danger"><i class="fa fa-minus"></i> Remover lotes</button>
-                                </div>
-                              </div>
                             </div>
-                          </div>
+                            <a class="btn btn-primary" href="producto">Ver listado</a>
                         </div>
-                      </div>
+                        <div class="col-lg-2"></div> 
 
-                      <hr>
-
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <button type="button" id="producto" class="btn btn-primary  center-block">Enviar</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-
+                    </div>
                 </div>
-                
 
-              </div>
-              <a class="btn btn-primary" href="producto">Ver listado</a>
+                <?= $this->insert('overall/inner_footer') ?>
+
             </div>
-            <div class="col-lg-2"></div> 
-            
-          </div>
         </div>
-        
-        <?= $this->insert('overall/inner_footer')?>
-
-      </div>
     </div>
-  </div>
 
 
 
 
-<?= $this->insert('overall/footer')?>
-<script src="views/app/js/producto/crear.js"></script>
+    <?= $this->insert('overall/footer') ?>
+    <script src="views/app/js/producto/crear.js"></script>
 </body>
 
 </html>

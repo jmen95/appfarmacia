@@ -26,6 +26,8 @@
   <script src="views/admin/js/chartData.js"></script>
   <script src="views/admin/js/main.js"></script>
   <script src="views/app/js/jquery.numeric.js"></script>
+  <script src="views/app/js/jquery.maskMoney.min.js"></script>
+  <script src="views/app/js/jquery-ui.js"></script>
 <?php if (!isset($_SESSION[SESS_APP_ID])): ?>
   <script src="views/app/js/login.js"></script>
   <script src="views/app/js/register.js"></script>
@@ -33,7 +35,4 @@
 <?php else:?>
   <script src="views/app/js/funciones.js"></script>
 <?php endif ?>
-<script>
-  $('.numeric').numeric();
-</script>
 

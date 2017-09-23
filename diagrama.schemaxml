@@ -6,8 +6,8 @@
 <canvas zoom="100">
 <tables>
 <table name="auditoria" view="colnames">
-<left>33</left>
-<top>5</top>
+<left>243</left>
+<top>395</top>
 <width>96</width>
 <height>197</height>
 <sql_create_table>CREATE TABLE `auditoria` (
@@ -24,10 +24,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="categoria" view="colnames">
-<left>523</left>
-<top>188</top>
+<left>1260</left>
+<top>331</top>
 <width>127</width>
-<height>146</height>
+<height>130</height>
 <sql_create_table>CREATE TABLE `categoria` (
   `catcodigo` int(11) NOT NULL AUTO_INCREMENT,
   `catnombre` varchar(50) NOT NULL,
@@ -37,23 +37,35 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="empresa" view="colnames">
-<left>468</left>
-<top>663</top>
+<left>618</left>
+<top>707</top>
 <width>103</width>
-<height>146</height>
+<height>128</height>
 <sql_create_table>CREATE TABLE `empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `empname` varchar(150) NOT NULL,
   `empdesc` varchar(200) DEFAULT NULL,
   `empnit` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="formafarmaceutica" view="colnames">
+<left>1189</left>
+<top>633</top>
+<width>90</width>
+<height>113</height>
+<sql_create_table>CREATE TABLE `formafarmaceutica` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="laboratorio" view="colnames">
-<left>974</left>
-<top>358</top>
+<left>1421</left>
+<top>245</top>
 <width>127</width>
-<height>130</height>
+<height>131</height>
 <sql_create_table>CREATE TABLE `laboratorio` (
   `labcodigo` int(11) NOT NULL AUTO_INCREMENT,
   `labnombre` varchar(100) CHARACTER SET latin1 NOT NULL,
@@ -63,20 +75,22 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="lotes" view="colnames">
-<left>1293</left>
-<top>397</top>
-<width>133</width>
-<height>231</height>
+<left>1190</left>
+<top>11</top>
+<width>165</width>
+<height>265</height>
 <sql_create_table>CREATE TABLE `lotes` (
   `lotid` int(11) NOT NULL AUTO_INCREMENT,
   `lotfechavenc` date DEFAULT NULL,
-  `lotcantidad` int(11) DEFAULT NULL,
+  `lotcantidad` int(11) DEFAULT NULL COMMENT 'Numero de unidades',
   `lotcoba` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lotcodigo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Código del lote',
-  `lotvalorcompra` double DEFAULT NULL,
+  `lotvalorcompra` double DEFAULT NULL COMMENT 'Costo',
   `lotvalorventa` int(11) DEFAULT NULL,
   `lotfechaingreso` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `lotproveedor` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lotusuario` int(11) DEFAULT NULL,
+  `lotcantidaddisponible` int(11) DEFAULT NULL,
   PRIMARY KEY (`lotid`),
   KEY `lotes_ibfk_1` (`lotcoba`),
   KEY `lotes_ibfk_2` (`lotproveedor`),
@@ -85,10 +99,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="movimientos" view="colnames">
-<left>410</left>
-<top>12</top>
+<left>681</left>
+<top>321</top>
 <width>106</width>
-<height>163</height>
+<height>149</height>
 <sql_create_table>CREATE TABLE `movimientos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `iduser` int(11) DEFAULT NULL,
@@ -103,8 +117,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="notificaciones" view="colnames">
-<left>14</left>
-<top>573</top>
+<left>1468</left>
+<top>545</top>
 <width>131</width>
 <height>214</height>
 <sql_create_table>CREATE TABLE `notificaciones` (
@@ -120,10 +134,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="paginas" view="colnames">
-<left>301</left>
-<top>647</top>
+<left>22</left>
+<top>463</top>
 <width>105</width>
-<height>170</height>
+<height>180</height>
 <sql_create_table>CREATE TABLE `paginas` (
   `pagid` int(11) NOT NULL AUTO_INCREMENT,
   `pagname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -132,11 +146,11 @@
   `pagestado` varchar(1) COLLATE utf8_unicode_ci DEFAULT 'A',
   `nivel` float DEFAULT NULL,
   PRIMARY KEY (`pagid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="permisos" view="colnames">
-<left>168</left>
-<top>486</top>
+<left>169</left>
+<top>649</top>
 <width>106</width>
 <height>146</height>
 <sql_create_table>CREATE TABLE `permisos` (
@@ -151,8 +165,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="presentacion" view="colnames">
-<left>569</left>
-<top>507</top>
+<left>1284</left>
+<top>533</top>
 <width>129</width>
 <height>146</height>
 <sql_create_table>CREATE TABLE `presentacion` (
@@ -163,31 +177,48 @@
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
+<table name="principioactivo" view="colnames">
+<left>428</left>
+<top>7</top>
+<width>141</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `principioactivo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre_idx` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
 <table name="producto" view="colnames">
-<left>739</left>
-<top>142</top>
-<width>167</width>
-<height>390</height>
+<left>872</left>
+<top>211</top>
+<width>173</width>
+<height>462</height>
 <sql_create_table>CREATE TABLE `producto` (
   `procodigobarra` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pronombre` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `pronombre` text COLLATE utf8_unicode_ci,
   `prolaboratorio` int(11) DEFAULT NULL COMMENT 'Código del laboratorio',
   `provalorventa` int(30) DEFAULT NULL,
-  `prostockminimo` int(99) DEFAULT NULL,
+  `prostockminimo` int(11) DEFAULT NULL,
+  `prostockmaximo` int(11) DEFAULT NULL,
   `prostockbodega` int(100) DEFAULT NULL,
   `procategoria` int(11) DEFAULT NULL COMMENT 'Código de la categoria',
-  `proestado` varchar(2) CHARACTER SET latin1 NOT NULL DEFAULT 'AC' COMMENT 'AC=Activo, IN=Inactivo',
+  `proestado` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'AC' COMMENT 'AC=Activo, IN=Inactivo',
   `profechaingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `proubicacion` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `proimagen` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
+  `proubicacion` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `proimagen` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `profechamodificacion` date DEFAULT NULL,
+  `procontenido` double DEFAULT NULL,
   `prounidadmedida` int(11) DEFAULT NULL,
-  `proreferencia` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
+  `proreferencia` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `proidusuario` int(11) DEFAULT NULL COMMENT 'Usuario que modifica',
   `prosucursal` int(11) NOT NULL,
   `proiva` double DEFAULT NULL COMMENT 'Porcentaje de iva',
-  `proprincipioactivo` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Principio activo',
   `propresentacion` int(11) DEFAULT NULL,
+  `prodescripcion` text COLLATE utf8_unicode_ci,
+  `proformafarmaceutica` int(11) DEFAULT NULL,
+  `prounidadventa` int(11) DEFAULT NULL,
   PRIMARY KEY (`procodigobarra`,`prosucursal`),
   KEY `proMarCodigo` (`prolaboratorio`),
   KEY `proGruCodigo` (`procategoria`),
@@ -195,17 +226,21 @@
   KEY `proIdUsuario` (`proidusuario`),
   KEY `sucursal` (`prosucursal`),
   KEY `proPresentacion` (`propresentacion`),
+  KEY `proformafarmaceutica` (`proformafarmaceutica`),
+  KEY `prounidadventa` (`prounidadventa`),
   CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`prolaboratorio`) REFERENCES `laboratorio` (`labcodigo`),
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`procategoria`) REFERENCES `categoria` (`catcodigo`),
   CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`prounidadmedida`) REFERENCES `unidadmedida` (`undcodigo`),
   CONSTRAINT `producto_ibfk_5` FOREIGN KEY (`proidusuario`) REFERENCES `users` (`userid`),
   CONSTRAINT `producto_ibfk_6` FOREIGN KEY (`prosucursal`) REFERENCES `sucursal` (`id`),
-  CONSTRAINT `producto_ibfk_7` FOREIGN KEY (`propresentacion`) REFERENCES `presentacion` (`id`)
+  CONSTRAINT `producto_ibfk_7` FOREIGN KEY (`propresentacion`) REFERENCES `presentacion` (`id`),
+  CONSTRAINT `producto_ibfk_8` FOREIGN KEY (`proformafarmaceutica`) REFERENCES `formafarmaceutica` (`id`),
+  CONSTRAINT `producto_ibfk_9` FOREIGN KEY (`prounidadventa`) REFERENCES `unidadventa` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="proveedor" view="colnames">
-<left>1454</left>
-<top>446</top>
+<left>1421</left>
+<top>19</top>
 <width>138</width>
 <height>214</height>
 <sql_create_table>CREATE TABLE `proveedor` (
@@ -220,9 +255,26 @@
   PRIMARY KEY (`prvnit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
+<table name="relprincipioactivoproducto" view="colnames">
+<left>670</left>
+<top>103</top>
+<width>128</width>
+<height>131</height>
+<sql_create_table>CREATE TABLE `relprincipioactivoproducto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `principioactivo` int(11) DEFAULT NULL,
+  `concentracion` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `producto` (`producto`),
+  KEY `principioactivo` (`principioactivo`),
+  CONSTRAINT `relprincipioactivoproducto_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `producto` (`procodigobarra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `relprincipioactivoproducto_ibfk_2` FOREIGN KEY (`principioactivo`) REFERENCES `principioactivo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
 <table name="role" view="colnames">
-<left>8</left>
-<top>301</top>
+<left>329</left>
+<top>616</top>
 <width>99</width>
 <height>146</height>
 <sql_create_table>CREATE TABLE `role` (
@@ -231,11 +283,11 @@
   `roldesc` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rolestado` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'AC',
   PRIMARY KEY (`rolid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="sucursal" view="colnames">
-<left>338</left>
-<top>418</top>
+<left>750</left>
+<top>581</top>
 <width>97</width>
 <height>214</height>
 <sql_create_table>CREATE TABLE `sucursal` (
@@ -250,11 +302,11 @@
   PRIMARY KEY (`id`),
   KEY `empresa` (`empresa`),
   CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`empresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
 </table>
 <table name="unidadmedida" view="colnames">
-<left>974</left>
-<top>526</top>
+<left>1112</left>
+<top>416</top>
 <width>131</width>
 <height>146</height>
 <sql_create_table>CREATE TABLE `unidadmedida` (
@@ -265,9 +317,21 @@
   PRIMARY KEY (`undcodigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
+<table name="unidadventa" view="colnames">
+<left>1068</left>
+<top>710</top>
+<width>111</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `unidadventa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
 <table name="users" view="colnames">
-<left>173</left>
-<top>164</top>
+<left>482</left>
+<top>394</top>
 <width>122</width>
 <height>311</height>
 <sql_create_table>CREATE TABLE `users` (
@@ -292,11 +356,11 @@
   KEY `sucursal` (`sucursal`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rol`) REFERENCES `role` (`rolid`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`sucursal`) REFERENCES `sucursal` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="venta" view="colnames">
-<left>1433</left>
-<top>131</top>
+<left>50</left>
+<top>210</top>
 <width>142</width>
 <height>129</height>
 <sql_create_table>CREATE TABLE `venta` (
@@ -307,8 +371,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
 </table>
 <table name="ventadetalle" view="colnames">
-<left>1148</left>
-<top>77</top>
+<left>343</left>
+<top>156</top>
 <width>168</width>
 <height>214</height>
 <sql_create_table>CREATE TABLE `ventadetalle` (

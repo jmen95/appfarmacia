@@ -18,7 +18,7 @@ final class Producto extends Models implements OCREND {
     $i = array(
       'proCodigoBarra' => $data['codigobarra'],
       'proNombre' => $data['nombre'],
-      'proMarCodigo' => $data['marca'],
+      'proMarCodigo' => $data['laboratorio'],
       'proValorCompra' => $data['valorcompra'],
       'proStockMinimo' => $data['stockminimo'],
       'proGruCodigo' => $data['categoria'],
@@ -84,7 +84,32 @@ final class Producto extends Models implements OCREND {
     );
     $this->db->insert('producto',$i);
 
+    for ($j=0; $j < count($data['principio']); $j++) { 
+      if(!Func::emp($data['principio'][$j])){
+        #Se llama al store procedure que crea el principio activo si no existe
+        $this->db->query("CALL Spr_InsPrincipio('".$data['principio'][$j]."',
+        'AC')");
+      }
+    }
+
+    
+
     $l = array('codlote' => null);
+
+    for ($j=0; $j < count($data['codlote']); $j++) { 
+      if(!Func::emp($data['codlote'][$j])){
+        $l = array(
+          'codlote' => $data['codlote'][$j], 
+          'cantidad' => $data['cantidad'][$j], 
+          'fechavencimiento' => $data['fechavencimiento'][$j], 
+          'tipoiva' => $data['tipoiva'][$j],
+          'iva' => $data['iva'][$j]
+        );
+
+        $this->db->insert('lotes',$l);
+      }
+    }
+
     if($data['lotmultiple']=="S"){
       for ($j=0; $j < $data['codlote']; $j++) {
         $lotpiva=0;
@@ -170,27 +195,43 @@ final class Producto extends Models implements OCREND {
     return $this->db->select('*','producto',"proCodigoBarra='$this->id'");
   }
 
-  # Leer Marcas
-  final public function getLaboratoriosActivos() {
-    
+  # Leer Laboratorios
+  final public function getLaboratoriosActivos() {    
     return $this->db->select('labcodigo,labnombre','laboratorio',"labestado='AC'");
   }
 
-  # Leer Grupos
-  final public function getCategoriasActivas() {
-    
+  # Leer categorias
+  final public function getCategoriasActivas() {    
     return $this->db->select('catcodigo,catnombre','categoria',"catestado='AC'");
   }
 
+  # Leer Unidades de venta
+  final public function getUnidadesVentasActivas() {    
+    return $this->db->select('id,nombre','unidadventa',"estado='AC'");
+  }
+
   # Leer unidades de medida
-  final public function getUnidadesActivas() {
-    
+  final public function getUnidadesActivas() {    
     return $this->db->select('undcodigo,undnombre','unidadmedida',"undestado='AC'");
   }
 
+  # Leer Presentaciones
+  final public function getPresentacionesActivas() {    
+    return $this->db->select('id,prenombre','presentacion',"preestado='AC'");
+  }
+
+  # Leer Formas Farmaceuticas
+  final public function getFormasFarmaceuticasActivas() {    
+    return $this->db->select('id,nombre','formafarmaceutica',"estado='AC'");
+  }
+
+  # Leer principios Activos
+  final public function getPrincipiosActivos() {    
+    return $this->db->select('id,nombre','principioactivo',"estado='AC'");
+  }
+
   # Leer sucursal del usuario logueado
-  final public function getSucursalUsuario() {
-    
+  final public function getSucursalUsuario() {    
     return $this->db->select('sucursal','users',"userid=$this->id_user");
   }
 
